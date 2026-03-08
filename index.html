@@ -9,23 +9,9 @@
 
 .flower{
 position:fixed;
-font-size:22px;
 pointer-events:none;
+z-index:999;
 animation:fall linear forwards;
-}
-
-@keyframes fall{
-
-0%{
-transform:translate(0,0) rotate(0deg);
-opacity:1;
-}
-
-100%{
-transform:translate(120vw,120vh) rotate(720deg);
-opacity:0.8;
-}
-
 }
 
 body{
@@ -147,6 +133,20 @@ margin-top:10px;
 color:#888;
 }
 
+@keyframes fall{
+
+0%{
+transform:translate(0,0) rotate(0deg);
+opacity:1;
+}
+
+100%{
+transform:translate(100vw,100vh) rotate(720deg);
+opacity:0;
+}
+
+}
+
 </style>
 </head>
 
@@ -224,43 +224,6 @@ const data={
 47:{name:"Ngọc Vy",img:"",wish:`Sếp lớn Ngọc Vy 8/3 vui vẻ, luôn tươi cười và nhiều năng lượng nhé`}
 };
 
-function startFlowers(){
-
-const flowers=["🌸","🌺","🌷","🌼","💮"];
-
-setInterval(()=>{
-
-let flower=document.createElement("div");
-flower.className="flower";
-
-flower.innerText=flowers[Math.floor(Math.random()*flowers.length)];
-flower.style.fontSize=(18+Math.random()*20)+"px";
-flower.style.animationDuration=(5+Math.random()*4)+"s";
-
-let fromTop=Math.random()<0.5;
-
-if(fromTop){
-
-flower.style.top="-30px";
-flower.style.left=Math.random()*100+"vw";
-
-}else{
-
-flower.style.left="-30px";
-flower.style.top=Math.random()*60+"vh";
-
-}
-
-document.body.appendChild(flower);
-
-setTimeout(()=>{
-flower.remove();
-},9000);
-
-},300);
-
-}
-  
 function submitSurvey(){
 
 let code=document.getElementById("code").value.trim();
@@ -283,6 +246,42 @@ document.getElementById("error").innerText="ID không hợp lệ.";
 
 }
 
+function startFlowers(){
+
+const flowers=["🌸","🌺","🌷","🌼","💮"];
+
+setInterval(()=>{
+
+let flower=document.createElement("div");
+flower.className="flower";
+
+flower.innerText=flowers[Math.floor(Math.random()*flowers.length)];
+
+flower.style.fontSize=(20+Math.random()*20)+"px";
+flower.style.animationDuration=(5+Math.random()*3)+"s";
+
+if(Math.random()<0.5){
+
+flower.style.top="-30px";
+flower.style.left=Math.random()*100+"vw";
+
+}else{
+
+flower.style.left="-30px";
+flower.style.top=Math.random()*70+"vh";
+
+}
+
+document.body.appendChild(flower);
+
+setTimeout(()=>{
+flower.remove();
+},8000);
+
+},400);
+
+}
+
 function openCard(){
 document.getElementById("card").classList.add("open");
 startFlowers();
@@ -292,4 +291,5 @@ startFlowers();
 
 </body>
 </html>
+
 
