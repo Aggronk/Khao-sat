@@ -7,6 +7,27 @@
 
 <style>
 
+.flower{
+position:fixed;
+font-size:22px;
+pointer-events:none;
+animation:fall linear forwards;
+}
+
+@keyframes fall{
+
+0%{
+transform:translate(0,0) rotate(0deg);
+opacity:1;
+}
+
+100%{
+transform:translate(120vw,120vh) rotate(720deg);
+opacity:0.8;
+}
+
+}
+
 body{
 font-family:Arial;
 background:linear-gradient(to bottom,#fff7cc,#ffd6e7);
@@ -203,6 +224,43 @@ const data={
 47:{name:"Ngọc Vy",img:"",wish:`Sếp lớn Ngọc Vy 8/3 vui vẻ, luôn tươi cười và nhiều năng lượng nhé`}
 };
 
+function startFlowers(){
+
+const flowers=["🌸","🌺","🌷","🌼","💮"];
+
+setInterval(()=>{
+
+let flower=document.createElement("div");
+flower.className="flower";
+
+flower.innerText=flowers[Math.floor(Math.random()*flowers.length)];
+flower.style.fontSize=(18+Math.random()*20)+"px";
+flower.style.animationDuration=(5+Math.random()*4)+"s";
+
+let fromTop=Math.random()<0.5;
+
+if(fromTop){
+
+flower.style.top="-30px";
+flower.style.left=Math.random()*100+"vw";
+
+}else{
+
+flower.style.left="-30px";
+flower.style.top=Math.random()*60+"vh";
+
+}
+
+document.body.appendChild(flower);
+
+setTimeout(()=>{
+flower.remove();
+},9000);
+
+},300);
+
+}
+  
 function submitSurvey(){
 
 let code=document.getElementById("code").value.trim();
@@ -227,9 +285,11 @@ document.getElementById("error").innerText="ID không hợp lệ.";
 
 function openCard(){
 document.getElementById("card").classList.add("open");
+startFlowers();
 }
 
 </script>
 
 </body>
 </html>
+
