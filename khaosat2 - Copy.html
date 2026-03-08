@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khảo sát về thực trạng lạm dụng AI của giới trẻ hiện nay</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:linear-gradient(to bottom,#fff7cc,#ffd6e7);
+min-height:100vh;
+margin:0;
+
+display:flex;
+justify-content:center;
+align-items:flex-start;
+
+position:relative;
+overflow-x:hidden;
+padding:40px 20px;
+}
+
+.box{
+background:white;
+width:92%;
+max-width:500px;
+padding:28px;
+border-radius:16px;
+box-shadow:0 10px 30px rgba(0,0,0,0.15);
+margin:auto;
+}
+
+input{
+width:100%;
+padding:10px;
+margin-top:10px;
+border:1px solid #ccc;
+border-radius:6px;
+}
+
+button{
+margin-top:20px;
+padding:10px 18px;
+background:#4285f4;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#3367d6;
+}
+
+.scene{
+perspective:1000px;
+
+position:fixed;
+top:45%;
+left:50%;
+transform:translate(-50%,-50%);
+}
+
+.card3d{
+display:none;
+width:100%;
+max-width:380px;
+position:relative;
+transform-style:preserve-3d;
+transition:transform 0.8s;
+margin-top:40px;
+}
+
+.card3d.open{
+transform:rotateY(180deg);
+}
+
+.front,.back{
+width:100%;
+height:100%;
+backface-visibility:hidden;
+background:white;
+border-radius:15px;
+padding:20px;
+text-align:center;
+}
+
+.back{
+transform:rotateY(180deg);
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+}
+
+img{
+width:160px;
+height:160px;
+border-radius:10px;
+object-fit:cover;
+}
+
+.name{
+font-size:22px;
+font-weight:bold;
+margin-top:10px;
+}
+
+#wish{
+background:#fff5f8;
+padding:18px;
+border-radius:12px;
+text-align:center;
+line-height:1.6;
+margin-top:12px;
+font-size:16px;
+
+max-height:160px;
+overflow-y:auto;
+}
+
+.error{
+margin-top:10px;
+color:#888;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="box" id="survey">
+
+<h2>Khảo sát về thực trạng lạm dụng AI của giới trẻ hiện nay</h2>
+
+<p>Khảo sát ẩn danh dành cho học sinh nhằm nghiên cứu mức độ sử dụng AI trong học tập.</p>
+
+<label>ID người tham gia khảo sát</label>
+
+<input type="text" id="code" placeholder="Nhập ID của bạn">
+
+<button onclick="submitSurvey()">Tiếp tục</button>
+
+<p id="error" class="error"></p>
+
+</div>
+
+<div class="scene">
+
+<div class="card3d" id="card">
+
+<div class="front">
+<h2>💌 Bạn có một tấm thiệp</h2>
+<button onclick="openCard()">Mở thiệp</button>
+</div>
+
+<div class="back">
+
+<img id="photo">
+
+<div class="name" id="name"></div>
+
+<div id="stt"></div>
+
+<p id="wish"></p>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const data={
+1:{name:"Phương An",img:"",wish:``},
+2:{name:"Trúc Anh",img:"",wish:``},
+3:{name:"Kim Anh",img:"",wish:`Tui chúc bà 1 ngày 8/3, và mọi ngày trong đời bà đều vui vẻ, hạnh phúc nhé!`},
+4:{name:"Vân Anh",img:"",wish:``},
+5:{name:"Đinh Quỳnh Anh",img:"",wish:``},
+6:{name:"Quỳnh Anh",img:"",wish:``},
+7:{name:"Nhật Ánh",img:"",wish:`Chúc Ánh Chu 8/3 vui vẻ, học giỏi không lại thành Ánh Ngu`},
+10:{name:"Huyền Diệu",img:"",wish:`Chúc Huyền Diệu 8/3 vui vẻ ngày càng học giỏi`},
+12:{name:"Hạnh Dung",img:"",wish:``},
+16:{name:"Gia Hân",img:"",wish:``},
+18:{name:"Thu Hương",img:"",wish:``},
+23:{name:"Diệu Linh",img:"",wish:``},
+24:{name:"Vân Linh",img:"",wish:`Quen bt Vân Linh cx khá lâu r, nhưng tui ms nhận ra là tui chx chúc bà dc câu nào thật tâm từ lúc bt bà đến h hết -.- . Để "bù đắp" cho điều đó, 8-3 năm nay tui chúc bà sẽ thành công trên đam mê và sở thích của mình, chinh phục được những khó khăn và hoàn thành được những mục tiêu của bản thân, ko còn tự ti về chiều cao của bản thân nx ( tui thấy lùn lùn cx dễ thương lắm á). Tui và cả lớp sẽ luôn ủng hộ bà!!!`},
+26:{name:"Khánh Ly",img:"",wish:``},
+30:{name:"Diễm My",img:"",wish:``},
+32:{name:"Thanh Ngân",img:"",wish:``},
+33:{name:"Xuân Nghi",img:"",wish:``},
+35:{name:"Linh Phương",img:"",wish:`Chúc Linh Phương ngày 8/3 thật rạng rỡ, luôn xinh đẹp, hạnh phúc và thành công với những dự định của mình nhé!`},
+37:{name:"Minh Tâm",img:"",wish:``},
+39:{name:"Anh Thư",img:"",wish:``},
+40:{name:"Minh Thư",img:"",wish:``},
+41:{name:"Thanh Thủy",img:"",wish:``},
+42:{name:"Yến Trang",img:"",wish:``},
+43:{name:"Thanh Trúc",img:"",wish:``},
+44:{name:"Mỹ Tú",img:"",wish:`Đối với 1 bông hoa, điều tuyệt nhất là được tưới bằng niềm vui hạnh phúc. Thế nên, hãy luôn giữ nụ cười trên môi nhé Mutis, vì đối với mọi người, cậu luôn là 1 bông hoa đặc biệt!`},
+47:{name:"Ngọc Vy",img:"",wish:`Sếp lớn Ngọc Vy 8/3 vui vẻ, luôn tươi cười và nhiều năng lượng nhé`}
+};
+
+function submitSurvey(){
+
+let code=document.getElementById("code").value.trim();
+let card=data[code];
+
+if(card){
+
+document.getElementById("survey").style.display="none";
+document.getElementById("card").style.display="block";
+
+document.getElementById("name").innerText=card.name;
+document.getElementById("stt").innerText="STT: "+code;
+document.getElementById("wish").innerText=card.wish;
+
+}else{
+
+document.getElementById("error").innerText="ID không hợp lệ.";
+
+}
+
+}
+
+function openCard(){
+document.getElementById("card").classList.add("open");
+}
+
+</script>
+
+</body>
+</html>
