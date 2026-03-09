@@ -99,7 +99,8 @@ transform:rotateY(180deg);
 display:flex;
 flex-direction:column;
 align-items:center;
-justify-content:center;
+padding-top:70px;
+position:relative;
 }
 
 img{
@@ -147,6 +148,37 @@ opacity:0;
 
 }
 
+.ribbon{
+position:absolute;
+top:-60px;
+
+background:#d60000;
+color:white;
+font-weight:bold;
+font-size:22px;
+
+padding:10px 25px;
+border-radius:8px;
+
+box-shadow:0 5px 12px rgba(0,0,0,0.25);
+
+animation:ribbonDrop 1s ease forwards;
+}
+
+@keyframes ribbonDrop{
+
+0%{
+top:-80px;
+opacity:0;
+}
+
+100%{
+top:20px;
+opacity:1;
+}
+
+}
+
 </style>
 </head>
 
@@ -178,6 +210,8 @@ opacity:0;
 </div>
 
 <div class="back">
+
+<div class="ribbon">🎉 Mừng ngày 8/3 🎉</div>
 
 <img id="photo">
 
@@ -292,6 +326,7 @@ startFlowers();
 
 </body>
 </html>
+
 
 
 
