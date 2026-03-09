@@ -150,45 +150,25 @@ opacity:0;
 
 .ribbon{
 position:absolute;
-top:-40px;
+top:-50px;
 left:50%;
 transform:translateX(-50%);
 
-background:#d60000;
-color:#ffd700;
+width:260px;
+height:110px;
 
+background:url("ribbon.png") center/contain no-repeat;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+color:#ffd700;
 font-weight:bold;
 font-size:22px;
-
-padding:10px 40px;
-
-border-radius:6px;
-
-box-shadow:0 6px 15px rgba(0,0,0,0.25);
+text-shadow:0 2px 4px rgba(0,0,0,0.5);
 
 animation:ribbonDrop 1s ease forwards;
-}
-
-/* hai đuôi ribbon */
-
-.ribbon:before,
-.ribbon:after{
-content:"";
-position:absolute;
-top:100%;
-width:0;
-height:0;
-border-top:15px solid #a80000;
-}
-
-.ribbon:before{
-left:0;
-border-right:20px solid transparent;
-}
-
-.ribbon:after{
-right:0;
-border-left:20px solid transparent;
 }
 
 @keyframes ribbonDrop{
@@ -352,6 +332,7 @@ startFlowers();
 
 </body>
 </html>
+
 
 
 
