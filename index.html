@@ -173,6 +173,8 @@ text-shadow:0 2px 4px rgba(0,0,0,0.5);
 z-index:1000;
 
 filter:drop-shadow(0 10px 12px rgba(0,0,0,0.35));
+
+display:none;
 }
 
 @keyframes ribbonDrop{
@@ -332,6 +334,8 @@ function openCard(){
 document.getElementById("card").classList.add("open");
 
 let ribbon=document.querySelector(".ribbon");
+
+ribbon.style.display="flex";
 ribbon.style.animation="ribbonDrop 1s ease forwards";
   
 startFlowers();
@@ -341,6 +345,7 @@ startFlowers();
 
 </body>
 </html>
+
 
 
 
