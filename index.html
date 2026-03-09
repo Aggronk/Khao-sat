@@ -263,7 +263,7 @@ const data={
 43:{name:"Thanh Trúc",img:"ttruc.jpg",wish:`Chúc Thanh Trúc ngày 8/3 thật vui, luôn tỏa sáng theo cách riêng của mình.`},
 44:{name:"Mỹ Tú",img:"mtu.jpg",wish:`Đối với 1 bông hoa, điều tuyệt nhất là được tưới bằng niềm vui hạnh phúc. Thế nên, hãy luôn giữ nụ cười trên môi nhé Mutis, vì đối với mọi người, cậu luôn là 1 bông hoa đặc biệt! - Nhân ngày 8/3 chúc bạn luôn xinh đẹp, may mắn và ngày càng thành công. Chúc hôm nay nhận được thật nhiều hoa và quà! 🌸`},
 47:{name:"Ngọc Vy",img:"veve.jpg",wish:`Sếp lớn Ngọc Vy 8/3 vui vẻ, luôn tươi cười và nhiều năng lượng nhé`},
-999:{name:"Cô Vân",img:"",wish:`Chúc cô sẽ luôn vui tươi, hạnh phúc, và đạt được nhiều thành công trong công việc!`}
+999:{name:"Cô Vân",img:"co.jpg",wish:`Chúc cô sẽ luôn vui tươi, hạnh phúc, và đạt được nhiều thành công trong công việc!`}
 };
 
 function submitSurvey(){
@@ -275,7 +275,8 @@ if(card){
 
 document.getElementById("survey").style.display="none";
 document.getElementById("card").style.display="block";
-
+  
+document.getElementById("photo").src = card.img;
 document.getElementById("name").innerText=card.name;
 document.getElementById("stt").innerText="STT: "+code;
 document.getElementById("wish").innerText=card.wish;
@@ -333,6 +334,7 @@ startFlowers();
 
 </body>
 </html>
+
 
 
 
